@@ -101,3 +101,25 @@ def gameover(b):
             p += (1 if b[i][j] > 0 else 0)
     if p==9: return 3
     else: return 0
+    def play(x,y):
+    global turn
+    i = 3-int(y+5)//2
+    j = int(x+5)//2 - 1
+    if i>2 or j>2 or i<0 or j<0 or b[i][j]!=0: return
+    if turn == 'x': b[i][j], turn = 1, 'o'
+    else: b[i][j], turn = 2, 'x'
+    draw(b)
+    r = gameover(b)
+    if r==1:
+        screen.textinput("Game over!","X won!")
+    elif r==2:
+        screen.textinput("Game over!","O won!")
+    elif r==3:
+        screen.textinput("Game over!", "Tie!")
+
+b = [ [ 0,0,0 ], [ 0,0,0 ], [ 0,0,0 ] ]
+draw(b)
+turn = 'x'
+screen.onclick(play)
+turtle.mainloop()
+    
